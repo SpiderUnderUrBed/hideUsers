@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "paths": {
-            "@utils/*": ["./node_modules/@vencord/types/utils/*"],
-            "@utils/api/ContextMenu": ["./node_modules/@vencord/api/ContextMenu"]
+            "@utils/types/*": ["./node_modules/@vencord/types/utils/*"],
+            "@utils/api/*": ["./node_modules/@vencord/types/api/*"],
         }
     },
 }

@@ -1,8 +1,8 @@
 // import definePlugin from "@utils/types";
 //import { definePluginSettings } from "@vencord/types/api/settings";
-import definePlugin, { OptionType } from "@utils/types";
-import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
-
+import definePlugin, { OptionType } from "@utils/types/types";
+//import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu/removeContextMenuPatch";
+import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
 // const myGlobalContextMenuPatch: removeContextMenuPatch = (navId, children, ...args) => {
 //     // You can log navId, args, or manipulate children here
 //     console.log('Nav ID:', navId);
