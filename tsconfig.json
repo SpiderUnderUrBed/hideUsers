@@ -3,6 +3,7 @@
         "paths": {
             "@utils/types/*": ["./node_modules/@vencord/types/utils/*"],
             "@utils/api/*": ["./node_modules/@vencord/types/api/*"],
+            "@utils/api/ContextMenu/*": ["./node_modules/@vencord/types/api/ContextMenu/*"],
         }
     },
 }
