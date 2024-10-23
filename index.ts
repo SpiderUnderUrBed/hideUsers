@@ -1,6 +1,6 @@
 // import definePlugin from "@utils/types";
 //import { definePluginSettings } from "@vencord/types/api/settings";
-import definePlugin, { OptionType } from "@vencord/types/utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 
 export default definePlugin({
     name: "hideUser",
