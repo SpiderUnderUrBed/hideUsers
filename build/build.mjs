@@ -20,7 +20,7 @@ const contexts = await Promise.all(
         return context({
             entryPoints: [`./src/${p}`],
             outfile: `dist/${p}`,
-            format: "iife",
+            format: "cjs",
             globalName: "VencordPlugin",
             jsxFactory: "Vencord.Webpack.Common.React.createElement",
             jsxFragment: "Vencord.Webpack.Common.React.Fragment",
@@ -40,11 +40,11 @@ const contexts = await Promise.all(
                     '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
                 })
             ],
-            footer: { 
-                js: `
-                    return VencordPlugin;\n//# sourceURL=${encodeURI(p)}
-                `
-            },
+            // footer: { 
+            //     js: `
+            //         return VencordPlugin;\n//# sourceURL=${encodeURI(p)}
+            //     `
+            // },
             minify: false,
             bundle: true,
             sourcemap: "linked",
