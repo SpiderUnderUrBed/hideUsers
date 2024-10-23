@@ -3,19 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build/build.mjs",
+    "build:dev": "pnpm build --dev",
+    "build:watch": "pnpm build --dev --watch",
+    "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-  },
   "devDependencies": {
     "@fal-works/esbuild-plugin-global-externals": "^2.1.2",
     "@types/node": "^18.15.11",
     "@vencord/types": "latest",
-    "esbuild": "^0.17.17",
+    "esbuild": "^0.17.19",
     "prettier": "^2.8.7",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "esbuild-plugin-alias": "^0.2.1"
   }
 }

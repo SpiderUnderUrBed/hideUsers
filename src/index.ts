@@ -1,6 +1,6 @@
 // import definePlugin from "@utils/types";
 //import { definePluginSettings } from "@vencord/types/api/settings";
-import definePlugin, { OptionType } from "@utils/types/types";
+import definePlugin, { OptionType } from "@utils/types";
 //import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu/removeContextMenuPatch";
 import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
 // const myGlobalContextMenuPatch: removeContextMenuPatch = (navId, children, ...args) => {
@@ -15,7 +15,7 @@ const patchContextMenu: GlobalContextMenuPatchCallback = (navId, children) => ()
     console.log(navId)
 };
 export default definePlugin({
-    name: "hideUser",
+    name: "hideUser",   
     description: "This hides a user like friend from DM's and friends page",
     authors: [{
         name: "SpiderUnderUrBed",
