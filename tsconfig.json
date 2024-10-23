@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@utils/*": ["./node_modules/@vencord/types/utils/*"]
+        }
+    },
+}
