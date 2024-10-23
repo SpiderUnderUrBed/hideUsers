@@ -9,7 +9,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/node": "^22.7.9",
-    "@vencord/types": "^1.8.4"
+  },
+  "devDependencies": {
+    "@fal-works/esbuild-plugin-global-externals": "^2.1.2",
+    "@types/node": "^18.15.11",
+    "@vencord/types": "latest",
+    "esbuild": "^0.17.17",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
   }
 }
