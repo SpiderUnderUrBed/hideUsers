@@ -20,14 +20,16 @@ const contexts = await Promise.all(
         return context({
             entryPoints: [`./src/${p}`],
             outfile: `dist/${p}`,
-            format: "cjs",
+            format: "esm",
+            //esm and ejs work
             globalName: "VencordPlugin",
             jsxFactory: "Vencord.Webpack.Common.React.createElement",
             jsxFragment: "Vencord.Webpack.Common.React.Fragment",
             external: [
                 "@vencord/types/*", 
                 "@utils/api/ContextMenu", 
-                "@webpack"
+                "@webpack",
+                "@utils/types/webpack/common"
             ],
             plugins: [
                 vencordDep,
@@ -36,6 +38,7 @@ const contexts = await Promise.all(
                     '@utils': resolve(parentDir, '../Vencord/src/utils'),
                     '@utils/api': resolve(parentDir, '../Vencord/src/api'),
                     "@utils/api/ContextMenu": resolve(parentDir, '../Vencord/src/api/ContextMenu.ts'),
+                    "@utils/types/webpack/common": resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
                     '@webpack': resolve(parentDir, '../Vencord/src/webpack/index.ts'),
                     '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
                 })
