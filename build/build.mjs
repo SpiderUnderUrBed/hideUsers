@@ -36,15 +36,15 @@ const contexts = await Promise.all(
             ],
             plugins: [
                 vencordDep,
-                // alias({
-                //     '@utils/types': resolve(parentDir, '../Vencord/src/utils/types.ts'),
-                //     '@utils': resolve(parentDir, '../Vencord/src/utils'),
-                //     '@utils/api': resolve(parentDir, '../Vencord/src/api'),
-                //     "@utils/api/ContextMenu": resolve(parentDir, '../Vencord/src/api/ContextMenu.ts'),
-                //     "@utils/types/webpack/common": resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
-                //     '@webpack': resolve(parentDir, '../Vencord/src/webpack/index.ts'),
-                //     '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
-                // })
+                alias({
+                    '@utils/types': resolve(parentDir, '../Vencord/src/utils/types.ts'),
+                    '@utils': resolve(parentDir, '../Vencord/src/utils'),
+                    '@utils/api': resolve(parentDir, '../Vencord/src/api'),
+                    "@utils/api/ContextMenu": resolve(parentDir, '../Vencord/src/api/ContextMenu.ts'),
+                    "@utils/types/webpack/common": resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
+                    '@webpack': resolve(parentDir, '../Vencord/src/webpack/index.ts'),
+                    '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
+                })
             ],
             // footer: { 
             //     js: `
