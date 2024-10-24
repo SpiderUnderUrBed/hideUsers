@@ -1,33 +1,22 @@
-// import definePlugin from "@utils/types";
-//import { definePluginSettings } from "@vencord/types/api/settings";
-import definePlugin, { OptionType } from "@utils/types";
+//import { definePlugin } from "@vencord/types/Vencord";
+// import definePlugin from "@vencord/types/utils/types";
+// import { definePluginSettings } from "@vencord/types/api/Settings";
+// import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@vencord/types/api/ContextMenu"
 //import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu/removeContextMenuPatch";
-import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
-import { Menu } from "@utils/types/webpack/common";
 
-// const myGlobalContextMenuPatch: removeContextMenuPatch = (navId, children, ...args) => {
-//     // You can log navId, args, or manipulate children here
-//     console.log('Nav ID:', navId);
-//     console.log('Arguments:', args);
+// import definePlugin, { OptionType } from "@utils/types";
+// import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
+// import { Menu } from "@utils/types/webpack/common";
 
-//     // Modify or enhance the context menu items
-//     const modifiedChildren = [...children];
-// }
+// import definePlugin from "../../types/utils/types";
+// import { definePluginSettings } from "../../types/utils/types";
+// import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "../../types/utils/types"
+//C:\Users\SpiderUnderUrBed.DaSpiderCave\Documents\Vencord\src
 
-// const patchContextMenu: GlobalContextMenuPatchCallback = (navId, children) => () => {
-//     console.log("entry " + navId + " " + children)
-// };
-// const patchContextMenu: GlobalContextMenuPatchCallback = (navId, children) => () => {
-//     children.unshift((
-//         <Menu.MenuItem
-//             id="example-context-menu-item"
-//             label="read if cute"
-//             action={() => {
-//                 alert(":3");
-//             }}
-//         />
-//     ));
-// };
+//import definePlugin from "C:/Users/SpiderUnderUrBed.DaSpiderCave/Documents/Vencord/src/types/utils/types";
+import definePlugin, { definePluginSettings } from "C:/Users/SpiderUnderUrBed.DaSpiderCave/Documents/Vencord/src/utils/types";
+import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "C:/Users/SpiderUnderUrBed.DaSpiderCave/Documents/Vencord/src/api/ContextMenu"
+
 const patchContextMenu: GlobalContextMenuPatchCallback = (navId, children) => () => {
     // Search for the element with the class 'peopleList_e0840f'
     const targetElement = children.find(child =>

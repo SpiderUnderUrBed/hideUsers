@@ -25,23 +25,26 @@ const contexts = await Promise.all(
             globalName: "VencordPlugin",
             jsxFactory: "Vencord.Webpack.Common.React.createElement",
             jsxFragment: "Vencord.Webpack.Common.React.Fragment",
+            packages: 'external',
             external: [
                 "@vencord/types/*", 
-                "@utils/api/ContextMenu", 
+                "@utils/api/ContextMenu/*", 
                 "@webpack",
-                "@utils/types/webpack/common"
+                // "@utils/*",
+                "@utils/types/webpack/common",
+                //"../Vencord/src/webpack/index.ts"
             ],
             plugins: [
                 vencordDep,
-                alias({
-                    '@utils/types': resolve(parentDir, '../Vencord/src/utils/types.ts'),
-                    '@utils': resolve(parentDir, '../Vencord/src/utils'),
-                    '@utils/api': resolve(parentDir, '../Vencord/src/api'),
-                    "@utils/api/ContextMenu": resolve(parentDir, '../Vencord/src/api/ContextMenu.ts'),
-                    "@utils/types/webpack/common": resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
-                    '@webpack': resolve(parentDir, '../Vencord/src/webpack/index.ts'),
-                    '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
-                })
+                // alias({
+                //     '@utils/types': resolve(parentDir, '../Vencord/src/utils/types.ts'),
+                //     '@utils': resolve(parentDir, '../Vencord/src/utils'),
+                //     '@utils/api': resolve(parentDir, '../Vencord/src/api'),
+                //     "@utils/api/ContextMenu": resolve(parentDir, '../Vencord/src/api/ContextMenu.ts'),
+                //     "@utils/types/webpack/common": resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
+                //     '@webpack': resolve(parentDir, '../Vencord/src/webpack/index.ts'),
+                //     '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
+                // })
             ],
             // footer: { 
             //     js: `
