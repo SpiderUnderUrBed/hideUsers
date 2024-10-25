@@ -21,6 +21,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "esbuild-plugin-alias": "^0.2.1"
+    "esbuild-plugin-alias": "^0.2.1",
+    "js-yaml": "^4.1.0"
   }
 }
