@@ -4,10 +4,6 @@
 // import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@vencord/types/api/ContextMenu"
 //import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu/removeContextMenuPatch";
 
-import definePlugin, { OptionType } from "@utils/types";
-import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
-import { Menu } from "@utils/types/webpack/common";
-
 // import definePlugin from "../../types/utils/types";
 // import { definePluginSettings } from "../../types/utils/types";
 // import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "../../types/utils/types"
@@ -16,6 +12,12 @@ import { Menu } from "@utils/types/webpack/common";
 //import definePlugin from "C:/Users/SpiderUnderUrBed.DaSpiderCave/Documents/Vencord/src/types/utils/types";
 // import definePlugin, { definePluginSettings } from "C:/Users/SpiderUnderUrBed.DaSpiderCave/Documents/Vencord/src/utils/types";
 // import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "C:/Users/SpiderUnderUrBed.DaSpiderCave/Documents/Vencord/src/api/ContextMenu"
+
+import definePlugin from "@utils/types";
+import { OptionType } from "@utils/types";
+//import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "../node_modules/@vencord/types/api/ContextMenu.d.ts";
+import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
+import { Menu } from "@utils/types/webpack/common";
 
 const patchContextMenu: GlobalContextMenuPatchCallback = (navId, children) => () => {
     // Search for the element with the class 'peopleList_e0840f'

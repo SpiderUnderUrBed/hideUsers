@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../package.json"],
-  "sourcesContent": ["{\r\n  \"name\": \"hideuser\",\r\n  \"version\": \"1.0.0\",\r\n  \"main\": \"index.js\",\r\n  \"scripts\": {\r\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\r\n    \"build\": \"node build/build.mjs\",\r\n    \"build:dev\": \"pnpm build --dev\",\r\n    \"build:watch\": \"pnpm build --dev --watch\",\r\n    \"format\": \"prettier --write .\"\r\n  },\r\n  \"author\": \"\",\r\n  \"license\": \"ISC\",\r\n  \"description\": \"\",\r\n  \"devDependencies\": {\r\n    \"@fal-works/esbuild-plugin-global-externals\": \"^2.1.2\",\r\n    \"@types/node\": \"^18.15.11\",\r\n    \"@vencord/types\": \"latest\",\r\n    \"esbuild\": \"^0.17.19\",\r\n    \"prettier\": \"^2.8.7\",\r\n    \"typescript\": \"^5.0.4\"\r\n  }\r\n}\r\n"],
-  "mappings": "wBACE,IAAAA,EAAQ,WACRC,EAAW,QACXC,EAAQ,WACRC,EAAW,CACT,KAAQ,4CACR,MAAS,uBACT,YAAa,mBACb,cAAe,2BACf,OAAU,oBACZ,EACAC,EAAU,GACVC,EAAW,MACXC,EAAe,GACfC,EAAmB,CACjB,6CAA8C,SAC9C,cAAe,YACf,iBAAkB,SAClB,QAAW,WACX,SAAY,SACZ,WAAc,QAChB,EArBFC,EAAA,CACE,KAAAR,EACA,QAAAC,EACA,KAAAC,EACA,QAAAC,EAOA,OAAAC,EACA,QAAAC,EACA,YAAAC,EACA,gBAAAC,CAQF",
-  "names": ["name", "version", "main", "scripts", "author", "license", "description", "devDependencies", "package_default"]
-}

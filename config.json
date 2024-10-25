@@ -1,5 +1,5 @@
 {
     "autoDeploy": true,
-    "vencordDataDir": "../Vencord/src",
+    "vencordDataDir": "./output/",
     "pluginName": "hideUser"
 }

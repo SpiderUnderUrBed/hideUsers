@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../config.json"],
-  "sourcesContent": ["{\r\n    \"autoDeploy\": true,\r\n    \"vencordDataDir\": \"C:/Users/Ven/AppData/Roaming/VencordDesktop/VencordDesktop\"\r\n}"],
-  "mappings": "wBACI,IAAAA,EAAc,GACdC,EAAkB,6DAFtBC,EAAA,CACI,WAAAF,EACA,eAAAC,CACJ",
-  "names": ["autoDeploy", "vencordDataDir", "config_default"]
-}

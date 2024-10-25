@@ -15,6 +15,13 @@ const plugins = readdirSync("./src");
 const isDev = process.argv.includes("--dev");
 const watch = process.argv.includes("--watch");
 
+const primaryDir = resolve(parentDir, '../Vencord/src');
+const fallbackDir = resolve(parentDir, './node_modules/@vencord/types');
+
+function resolvePath(primaryPath, fallbackPath) {
+  return existsSync(primaryPath) ? primaryPath : fallbackPath;
+}
+
 const contexts = await Promise.all(
     plugins.map(p => {
         return context({
@@ -25,7 +32,7 @@ const contexts = await Promise.all(
             globalName: "VencordPlugin",
             jsxFactory: "Vencord.Webpack.Common.React.createElement",
             jsxFragment: "Vencord.Webpack.Common.React.Fragment",
-            packages: 'external',
+           // packages: 'external',
             external: [
                 "@vencord/types/*", 
                 "@utils/api/ContextMenu/*", 
@@ -37,13 +44,34 @@ const contexts = await Promise.all(
             plugins: [
                 vencordDep,
                 alias({
-                    '@utils/types': resolve(parentDir, '../Vencord/src/utils/types.ts'),
-                    '@utils': resolve(parentDir, '../Vencord/src/utils'),
-                    '@utils/api': resolve(parentDir, '../Vencord/src/api'),
-                    "@utils/api/ContextMenu": resolve(parentDir, '../Vencord/src/api/ContextMenu.ts'),
-                    "@utils/types/webpack/common": resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
-                    '@webpack': resolve(parentDir, '../Vencord/src/webpack/index.ts'),
-                    '@webpack/common': resolve(parentDir, '../Vencord/src/webpack/common/index.ts'),
+                    '@utils/types': resolvePath(
+                        resolve(primaryDir, 'utils/types.ts'),
+                        resolve(fallbackDir, 'utils/types.d.ts')
+                      ),
+                      '@utils': resolvePath(
+                        resolve(primaryDir, 'utils'),
+                        resolve(fallbackDir, 'utils')
+                      ),
+                      '@utils/api': resolvePath(
+                        resolve(primaryDir, 'api'),
+                        resolve(fallbackDir, 'api')
+                      ),
+                      '@utils/api/ContextMenu': resolvePath(
+                        resolve(primaryDir, 'api/ContextMenu.ts'),
+                        resolve(fallbackDir, 'api/ContextMenu.d.ts')
+                      ),
+                      '@utils/types/webpack/common': resolvePath(
+                        resolve(primaryDir, 'webpack/common/index.ts'),
+                        resolve(fallbackDir, 'webpack/common/index.d.ts')
+                      ),
+                      '@webpack': resolvePath(
+                        resolve(primaryDir, 'webpack/index.ts'),
+                        resolve(fallbackDir, 'webpack/index.d.ts')
+                      ),
+                      '@webpack/common': resolvePath(
+                        resolve(primaryDir, 'webpack/common/index.ts'),
+                        resolve(fallbackDir, 'webpack/common/index.d.ts')
+                      ),
                 })
             ],
             // footer: { 
@@ -53,7 +81,8 @@ const contexts = await Promise.all(
             // },
             minify: false,
             bundle: true,
-            sourcemap: "linked",
+         //   sourcemap: "linked",
+            sourcemap: false,
             logLevel: "info",
             tsconfig: "./build/tsconfig.json"
         });
