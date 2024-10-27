@@ -9,7 +9,9 @@
         "noImplicitAny": false,
         "target": "ESNEXT",
         "jsx": "preserve",
-
+       // "types": [
+            //"https://github.com/Vendicated/Vencord/blob/main/src/api/ContextMenu.ts"
+       // ],
         "paths": {
             "@utils/types/": ["../Vencord/src/types/*", "../../utils/types/*", "./node_modules/@vencord/types/*"],
             "@utils/*": ["../Vencord/src/utils/*", "../../utils/*", "./node_modules/@vencord/types/utils/*"],

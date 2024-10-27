@@ -1,26 +1,88 @@
-import { context } from "esbuild";
-import alias from 'esbuild-plugin-alias';
-import { cpSync, existsSync, readdirSync, rmSync, mkdirSync } from "fs"; // Import mkdirSync
-import vencordDep from "./vencordDeps.mjs";
-import Config from "../config.json" with { type: "json" };
-import path, { join, resolve } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);  
-const __dirname = path.dirname(__filename);
-const parentDir = path.dirname(__dirname);
-
-const plugins = readdirSync("./src");
 
 const isDev = process.argv.includes("--dev");
 const watch = process.argv.includes("--watch");
 
-const primaryDir = resolve(parentDir, '../Vencord/src');
-const fallbackDir = resolve(parentDir, './node_modules/@vencord/types');
+import { context } from "esbuild";
+import alias from 'esbuild-plugin-alias';
+import { cpSync, existsSync, readdirSync, rmSync, mkdirSync } from "fs";
+import vencordDep from "./vencordDeps.mjs";
+import path, { join, resolve } from "path";
+import { fileURLToPath } from "url";
+import simpleGit from 'simple-git';
+import Config from "../config.json" with { type: "json" };
 
-function resolvePath(primaryPath, fallbackPath) {
-  return existsSync(primaryPath) ? primaryPath : fallbackPath;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const parentDir = path.dirname(__dirname);
+
+const primaryDir = resolve(parentDir, '../Vencord/src');
+const fallbackDir = resolve(parentDir, './lib/Vencord/src');
+
+// Define path mappings with support for multiple paths
+const pathMappings = [
+    {
+        alias: '@utils/types',
+        paths: [
+            { path: resolve(primaryDir, 'utils/types.ts') },
+            { path: resolve(fallbackDir, 'utils/types.ts') }
+        ]
+    },
+    {
+        alias: '@utils',
+        paths: [
+            { path: resolve(primaryDir, 'utils') },
+            { path: resolve(fallbackDir, 'utils') }
+        ]
+    },
+    {
+        alias: '@utils/api',
+        paths: [
+            {  path: resolve(primaryDir, 'api') },
+            {  path: resolve(fallbackDir, 'api') }
+        ]
+    },
+    {
+        alias: '@utils/api/ContextMenu',
+        paths: [
+            { path: resolve(primaryDir, 'api/ContextMenu.ts') },
+            { path: resolve(fallbackDir, 'api/ContextMenu.ts') }
+        ]
+    },
+    {
+        alias: '@utils/types/webpack/common',
+        paths: [
+            { path: resolve(primaryDir, 'webpack/common/index.ts') },
+            { path: resolve(fallbackDir, 'webpack/common/index.ts') }
+        ]
+    },
+    {
+        alias: '@webpack',
+        paths: [
+            { path: resolve(primaryDir, 'webpack/index.ts') },
+            { path: resolve(fallbackDir, 'webpack/index.ts') }
+        ]
+    },
+    {
+        alias: '@webpack/common',
+        paths: [
+            { path: resolve(primaryDir, 'webpack/common/index.ts') },
+            { path: resolve(fallbackDir, 'webpack/common/index.ts') }
+        ]
+    }
+];
+
+// Function to resolve the first existing path
+function resolvePath(paths) {
+    for (const { path } of paths) {
+        if (existsSync(path)) {
+            return path; // Return the first path that exists
+        }
+    }
+    throw new Error("No valid path found for alias."); // Handle if no paths exist
 }
+
+// Setup esbuild context
+const plugins = readdirSync("./src");
 
 const contexts = await Promise.all(
     plugins.map(p => {
@@ -28,60 +90,33 @@ const contexts = await Promise.all(
             entryPoints: [`./src/${p}`],
             outfile: `dist/${p}`,
             format: "esm",
-            //esm and ejs work
             globalName: "VencordPlugin",
             jsxFactory: "Vencord.Webpack.Common.React.createElement",
             jsxFragment: "Vencord.Webpack.Common.React.Fragment",
-           // packages: 'external',
             external: [
-                "@vencord/types/*", 
-                "@utils/api/ContextMenu/*", 
+                "@vencord/types/*",
+                "@utils/api/ContextMenu/*",
                 "@webpack",
-                // "@utils/*",
                 "@utils/types/webpack/common",
-                //"../Vencord/src/webpack/index.ts"
+                "@utils/patches",
+                "@utils/Logger",
+                "@utils/lazyReact",
+                "@utils/react",
+                "@utils/lazy"
             ],
             plugins: [
                 vencordDep,
-                alias({
-                    '@utils/types': resolvePath(
-                        resolve(primaryDir, 'utils/types.ts'),
-                        resolve(fallbackDir, 'utils/types.d.ts')
-                      ),
-                      '@utils': resolvePath(
-                        resolve(primaryDir, 'utils'),
-                        resolve(fallbackDir, 'utils')
-                      ),
-                      '@utils/api': resolvePath(
-                        resolve(primaryDir, 'api'),
-                        resolve(fallbackDir, 'api')
-                      ),
-                      '@utils/api/ContextMenu': resolvePath(
-                        resolve(primaryDir, 'api/ContextMenu.ts'),
-                        resolve(fallbackDir, 'api/ContextMenu.d.ts')
-                      ),
-                      '@utils/types/webpack/common': resolvePath(
-                        resolve(primaryDir, 'webpack/common/index.ts'),
-                        resolve(fallbackDir, 'webpack/common/index.d.ts')
-                      ),
-                      '@webpack': resolvePath(
-                        resolve(primaryDir, 'webpack/index.ts'),
-                        resolve(fallbackDir, 'webpack/index.d.ts')
-                      ),
-                      '@webpack/common': resolvePath(
-                        resolve(primaryDir, 'webpack/common/index.ts'),
-                        resolve(fallbackDir, 'webpack/common/index.d.ts')
-                      ),
-                })
+                alias(
+                    Object.fromEntries(
+                        pathMappings.map(({ alias, paths }) => [
+                            alias,
+                            resolvePath(paths) // Resolve the first existing path
+                        ])
+                    )
+                )
             ],
-            // footer: { 
-            //     js: `
-            //         return VencordPlugin;\n//# sourceURL=${encodeURI(p)}
-            //     `
-            // },
             minify: false,
             bundle: true,
-         //   sourcemap: "linked",
             sourcemap: false,
             logLevel: "info",
             tsconfig: "./build/tsconfig.json"
@@ -89,8 +124,11 @@ const contexts = await Promise.all(
     })
 );
 
+// Additional logic for watching or deploying as needed...
+
+
 function deploy() {
-    const { autoDeploy, vencordDataDir, pluginName } = Config; // Get pluginName from config
+    const { autoDeploy, vencordDataDir, pluginName } = Config;
     if (!autoDeploy) return;
 
     if (!existsSync(vencordDataDir)) {
@@ -102,9 +140,8 @@ function deploy() {
 
     if (autoDeploy && existsSync(vencordDataDir)) {
         const pluginDir = join(vencordDataDir, "userplugins");
-        const pluginFolder = join(pluginDir, pluginName); // Create a new folder with pluginName
+        const pluginFolder = join(pluginDir, pluginName);
 
-        // Create the plugin folder if it doesn't exist
         if (!existsSync(pluginFolder)) {
             mkdirSync(pluginFolder, { recursive: true });
             console.log(`Created plugin folder: ${pluginFolder}`);
