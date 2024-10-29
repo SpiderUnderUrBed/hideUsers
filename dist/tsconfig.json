@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "lib": ["DOM", "DOM.Iterable", "esnext", "esnext.array", "esnext.asynciterable", "esnext.symbol"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "strict": true,
+        "noImplicitAny": false,
+        "target": "ESNEXT",
+        "jsx": "preserve",
+       // "types": [
+            //"https://github.com/Vendicated/Vencord/blob/main/src/api/ContextMenu.ts"
+       // ],
+        "paths": {
+            "@utils/types/": ["../lib/Vencord/src/types", "../Vencord/src/types/*", "../../utils/types/*", "./node_modules/@vencord/types/*"],
+            "@utils/*": ["../Vencord/src/utils/*", "../../utils/*", "./node_modules/@vencord/types/utils/*"],
+            "@utils/api/*": ["../Vencord/src/api/*", "../../api/*", "./node_modules/@vencord/types/api/*"],
+            "@utils/api/ContextMenu": ["../Vencord/src/api/ContextMenu.ts", "../../api/ContextMenu.ts", "../lib/Vencord/src/api/ContextMenu.ts", "./node_modules/@vencord/types/api/ContextMenu.ts"],
+            "@utils/types/webpack/common": ["./node_modules/@vencord/types/webpack/common"],
+            "@utils/Logger": ["../lib/Vencord/utils/Logger"]
+
+        },
+    },
+    "include": [
+       // "../../src", 
+        "./src/**/*",
+        "./build/**/*"
+    ]
+}
