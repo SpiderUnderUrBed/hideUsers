@@ -21,12 +21,13 @@
     "install": "^0.13.0",
     "npm": "^10.9.0",
     "prettier": "^2.8.7",
-    "typescript": "^5.0.4",
-    "esbuild-plugin-alias": "^0.2.1",
-    "esbuild-plugin-alias-path": "^2.0.2",
-    "simple-git": "^3.27.0",
-    "vencord": "^0.0.0"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "esbuild-plugin-alias-path": "^2.0.2",
+    "@spiderunderurbed/esbuild-plugin-global-externals": "file:lib/modules/esbuild-plugin-global-externals",
+    "simple-git": "^3.27.0",
+    "vencord": "^0.0.0"
   }
 }
