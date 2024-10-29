@@ -18,13 +18,16 @@ import { OptionType } from "@utils/types";
 //import  { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "../node_modules/@vencord/types/api/ContextMenu.d.ts";
 import { addGlobalContextMenuPatch, GlobalContextMenuPatchCallback, removeContextMenuPatch } from "@utils/api/ContextMenu";
 import { Menu } from "@utils/types/webpack/common";
+//import path, { join, resolve } from "path";
+//const __dirname = path.dirname(__filename);
+//const parentDir = path.dirname(__dirname);
 
 const patchContextMenu: GlobalContextMenuPatchCallback = (navId, children) => () => {
     // Search for the element with the class 'peopleList_e0840f'
     const targetElement = children.find(child =>
       child?.props?.className?.includes('peopleList_e0840f')
     );
-    console.log("test")
+    console.log(parentDir)
     // Log the target element if found
     if (targetElement) {
       console.log('Found the element with class peopleList_e0840f:', targetElement);

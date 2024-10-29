@@ -3,13 +3,16 @@ const isDev = process.argv.includes("--dev");
 const watch = process.argv.includes("--watch");
 
 import { context } from "esbuild";
-import alias from 'esbuild-plugin-alias';
+//import aliasPath from 'esbuild-plugin-alias'
+import aliasPath from 'esbuild-plugin-alias-path';
+import { copy } from 'esbuild-plugin-copy';
 import { cpSync, existsSync, readdirSync, rmSync, mkdirSync } from "fs";
 import vencordDep from "./vencordDeps.mjs";
 import path, { join, resolve } from "path";
 import { fileURLToPath } from "url";
-import simpleGit from 'simple-git';
+// import simpleGit from 'simple-git';
 import Config from "../config.json" with { type: "json" };
+import { globalExternals } from "@fal-works/esbuild-plugin-global-externals";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -80,7 +83,11 @@ function resolvePath(paths) {
     }
     throw new Error("No valid path found for alias."); // Handle if no paths exist
 }
-
+function resolvePathWithLogging(alias, paths) {
+    const resolvedPath = resolvePath(paths); // Call your existing resolvePath function
+    console.log(`Resolved alias '${alias}' to path: ${resolvedPath}`);
+    return resolvedPath;
+}
 // Setup esbuild context
 const plugins = readdirSync("./src");
 
@@ -93,29 +100,63 @@ const contexts = await Promise.all(
             globalName: "VencordPlugin",
             jsxFactory: "Vencord.Webpack.Common.React.createElement",
             jsxFragment: "Vencord.Webpack.Common.React.Fragment",
+            platform: "node",
+            // external: [
+            //     "@utils/*",
+            //     "@vencord/*",
+            //     "@webpack"
+            // ],
+            // banner: {
+            //     js: `import * as vencord from "./imports.ts"`
+            // },
+            // external: [
+            //     "@vencord/types",
+            //    // "@utils/api/ContextMenu/*",
+            //     "@utils/api/ContextMenu",
+            //     "@webpack",
+            //     "@utils/types/webpack/common",
+            //     "@utils/patches",
+            //     "@utils/Logger",
+            //     "@utils/lazyReact",
+            //     "@utils/react",
+            //     "@utils/lazy",
+            //     "@utils/types",
+            // ],
             external: [
-                "@vencord/types/*",
-                "@utils/api/ContextMenu/*",
-                "@webpack",
-                "@utils/types/webpack/common",
-                "@utils/patches",
-                "@utils/Logger",
-                "@utils/lazyReact",
-                "@utils/react",
-                "@utils/lazy"
+                "@utils/api/ContextMenu",
+                "@utils/types",
             ],
+           // inject: [resolve(parentDir, "./assets/imports.ts")],
             plugins: [
-                vencordDep,
-                alias(
+                copy({
+                    // this is equal to process.cwd(), which means we use cwd path as base path to resolve `to` path
+                    // if not specified, this plugin uses ESBuild.build outdir/outfile options as base path.
+                    resolveFrom: 'cwd',
+                    assets: {
+                        from: ['./assets/*'],
+                        to: ['./assets', './dist/'],
+                    //   from: ['./tsconfig.json'],
+                    //   to: ['./tsconfig.json'],
+                    },
+                    watch: true,
+                  }),
+                aliasPath(
                     Object.fromEntries(
                         pathMappings.map(({ alias, paths }) => [
                             alias,
-                            resolvePath(paths) // Resolve the first existing path
+                            resolvePathWithLogging(alias, paths)// Resolve the first existing path
                         ])
                     )
-                )
+                ),
+                // globalExternals({
+                //     "@utils/types": {
+                //       varName: "vencord.types",
+                //       namedExports: ["types"],
+                //       //defaultExport: false
+                //     }
+                //   }),
+                vencordDep
             ],
-          //  platform: "node",
             minify: false,
             bundle: true,
             sourcemap: false,

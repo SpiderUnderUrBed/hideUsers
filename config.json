@@ -1,5 +1,5 @@
 {
     "autoDeploy": true,
-    "vencordDataDir": "/home/spiderunderurbed/Documents/Vencord/src/",
+    "vencordDataDir": "./target/debug/",
     "pluginName": "hideUser"
 }

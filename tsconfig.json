@@ -16,7 +16,7 @@
             "@utils/types/": ["../Vencord/src/types/*", "../../utils/types/*", "./node_modules/@vencord/types/*"],
             "@utils/*": ["../Vencord/src/utils/*", "../../utils/*", "./node_modules/@vencord/types/utils/*"],
             "@utils/api/*": ["../Vencord/src/api/*", "../../api/*", "./node_modules/@vencord/types/api/*"],
-            "@utils/api/ContextMenu": ["../Vencord/src/api/ContextMenu.ts", "../../api/ContextMenu.ts", "./node_modules/@vencord/types/api/ContextMenu.ts"],
+            "@utils/api/ContextMenu": ["../Vencord/src/api/ContextMenu.ts", "../../api/ContextMenu.ts", "../lib/Vencord/src/api/ContextMenu.ts", "./node_modules/@vencord/types/api/ContextMenu.ts"],
             "@utils/types/webpack/common": ["./node_modules/@vencord/types/webpack/common"],
         },
     },

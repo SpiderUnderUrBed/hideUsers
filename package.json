@@ -17,11 +17,15 @@
     "@types/node": "^18.15.11",
     "@vencord/types": "latest",
     "esbuild": "^0.17.19",
+    "esbuild-plugin-copy": "^2.1.1",
+    "install": "^0.13.0",
+    "npm": "^10.9.0",
     "prettier": "^2.8.7",
     "typescript": "^5.0.4"
   },
   "dependencies": {
     "esbuild-plugin-alias": "^0.2.1",
+    "esbuild-plugin-alias-path": "^2.0.2",
     "simple-git": "^3.27.0",
     "vencord": "^0.0.0"
   }
